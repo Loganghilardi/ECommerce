@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'user.title' | trans}}{% endblock %}
+
+{% block body %}
+    {% if users is not empty %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>{{'Email' | trans}}</th>
+                    <th>{{'First Name' | trans}}</th>
+                    <th>{{'Last Name' | trans}}</th>
+                    <th>{{'Registration date' | trans}}</th>
+                    <th>{{'Role' | trans}}</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.prenom }}</td>
+                    <td>{{ user.nom }}</td>
+                    <td>{{ user.dateInscription|date("Y-m-d H:i:s")}}</td>
+                    <td>
+                    {% if 'ROLE_SUPER_ADMIN' in user.roles %}
+                        ROLE_SUPER_ADMIN
+                    {% elseif 'ROLE_ADMIN' in user.roles %}
+                        ROLE_ADMIN
+                    {% endif %}
+                    </td>
+                    <td>
+                        <a class="btn btn-primary" href="{{ path('user_mod', {'id': user.id}) }}" role="button">{{'Mod user' | trans}}</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>{{ 'user.empty' | trans}}</p>
+    {% endif %}
+{% endblock %}
