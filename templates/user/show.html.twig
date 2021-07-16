@@ -43,10 +43,13 @@
             </tr>
         </tbody>
     </table>
-
-    <a href="{{ path('user_index') }}">back to list</a>
-
-    <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
-
-    {{ include('user/_delete_form.html.twig') }}
+    
+    
+    {% if app.user is not null and (is_granted('ROLE_USER') or is_granted('ROLE_ADMIN') or is_granted('ROLE_SUPER_ADMIN'))%}
+        <a class="btn btn-primary" href="{{ path('user_edit', {'id': user.id}) }}">Edit</a>
+    {% endif %}
+    
+    {% if app.user is not null and (is_granted('ROLE_SUPER_ADMIN')) %}
+        {{ include('user/_delete_form.html.twig') }}
+    {% endif %}
 {% endblock %}
