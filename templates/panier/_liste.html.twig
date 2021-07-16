@@ -1,10 +1,10 @@
 <table class="table">
 	<thead>
 		<tr>
-			<th>Nom du produit</th>
-			<th>Quantité</th>
-			<th>Prix</th>
-			<th>Montant</th>
+			<th{{'panier.produit' | trans}}</th>
+			<th>{{'panier.quantite' | trans}}</th>
+			<th>{{'panier.prix' | trans}}</th>
+			<th>{{'panier.montant' | trans}}</th>
 			<th></th>
 		</tr>
 	</thead>
@@ -20,7 +20,7 @@
 		{% else %}
 			<tr>
 				<td colspan="7">
-					Pas de paniers disponible
+					{{'panier.disponible'|trans}}
                 </td>
 			</tr>
 		{% endfor %}
