@@ -7,7 +7,6 @@ use App\Repository\PanierRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
-
 /** @Route("/panier", name="panier_home") */
 class PanierController extends AbstractController
 {
