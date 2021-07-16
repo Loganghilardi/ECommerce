@@ -37,6 +37,11 @@ class Panier
      */
     private $contenuPanier;
 
+    public function __construct()
+    {
+        $this->dataAchat = new \DateTime();
+    }
+
     public function getId(): ?int
     {
         return $this->id;

@@ -2,9 +2,15 @@
 
 namespace App\Controller;
 
+use App\Entity\ContenuPanier;
+use App\Entity\Panier;
 use App\Entity\Produit;
+use App\Entity\User;
+use App\Form\ContenuPanierType;
 use App\Form\ProduitType;
+use App\Repository\PanierRepository;
 use App\Repository\ProduitRepository;
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -91,4 +97,27 @@ class ProduitController extends AbstractController
 
         return $this->redirectToRoute('produit_index', [], Response::HTTP_SEE_OTHER);
     }
+
+    /** @Route("/cart/{id}/add", name="cart_add") */
+    public function addProductToCart(Produit $produit, Request $request): Response
+    {
+        $contenuPanier = new ContenuPanier();
+        $form = $this->createForm(ContenuPanierType::class, $contenuPanier);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            // Ne récupère pas le produit ...
+            $contenuPanier->addProduit($produit);
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($contenuPanier);
+            $entityManager->flush();
+        }
+
+        return $this->renderForm('produit/cartAdd.html.twig',[
+            'produit' => $produit,
+            'form' => $form
+        ]);
+    }
 }
+

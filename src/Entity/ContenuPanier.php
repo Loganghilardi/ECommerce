@@ -41,6 +41,7 @@ class ContenuPanier
 
     public function __construct()
     {
+        $this->dateAjoutPanier = new \DateTime();
         $this->produit = new ArrayCollection();
     }
 

@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\ContenuPanier;
+use App\Entity\Panier;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -18,6 +20,7 @@ class RegistrationController extends AbstractController
     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
     {
         $user = new User();
+        $panier = new Panier();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
@@ -30,11 +33,13 @@ class RegistrationController extends AbstractController
                 )
             );
 
-            /** Assigne aux nouveaux comptes le role User */
-            $user->setRoles(['ROLE_USER']);
-
+            // Crée un panier vide pour un nouvel utilisateur
+            $user->addPanier($panier);
+            $panier->setEtat(false);
+            
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
+            $entityManager->persist($panier);
             $entityManager->flush();
            
             $this->addFlash('success', 'Utilisateur crée');
