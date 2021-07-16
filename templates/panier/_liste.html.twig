@@ -1,0 +1,28 @@
+<table class="table">
+	<thead>
+		<tr>
+			<th>Nom du produit</th>
+			<th>Quantité</th>
+			<th>Prix</th>
+			<th>Montant</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for panier in paniers %}
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+		{% else %}
+			<tr>
+				<td colspan="7">
+					Pas de paniers disponible
+                </td>
+			</tr>
+		{% endfor %}
+	</tbody>
+</table>
