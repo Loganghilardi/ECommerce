@@ -29,12 +29,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $email;
 
     /**
-     * @ORM\Column(type="string", length=180, unique=true)
+     * @ORM\Column(type="string", length=180)
      */
     private $prenom;
 
     /**
-     * @ORM\Column(type="string", length=180, unique=true)
+     * @ORM\Column(type="string", length=180)
      */
     private $nom;
 
@@ -54,8 +54,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $paniers;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $dateInscription;
+
     public function __construct()
     {
+        $this->dateInscription = new \DateTime();
         $this->paniers = new ArrayCollection();
     }
 
@@ -198,6 +204,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $panier->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDateInscription(): ?\DateTimeInterface
+    {
+        return $this->dateInscription;
+    }
+
+    public function setDateInscription(\DateTimeInterface $dateInscription): self
+    {
+        $this->dateInscription = $dateInscription;
 
         return $this;
     }
