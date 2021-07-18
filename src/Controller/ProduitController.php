@@ -5,12 +5,9 @@ namespace App\Controller;
 use App\Entity\ContenuPanier;
 use App\Entity\Panier;
 use App\Entity\Produit;
-use App\Entity\User;
 use App\Form\ContenuPanierType;
 use App\Form\ProduitType;
-use App\Repository\PanierRepository;
 use App\Repository\ProduitRepository;
-use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -107,8 +104,9 @@ class ProduitController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            // Ne récupère pas le produit ...
             $contenuPanier->addProduit($produit);
+            // Est censé récupérer le panier de l'utilisateur connecté
+            //$contenuPanier->setPanier($panier);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($contenuPanier);
             $entityManager->flush();
