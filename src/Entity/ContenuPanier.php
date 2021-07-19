@@ -30,7 +30,7 @@ class ContenuPanier
     private $panier;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="integer")
      */
     private $quantite;
 
@@ -86,12 +86,12 @@ class ContenuPanier
         return $this;
     }
 
-    public function getQuantite(): ?string
+    public function getQuantite(): ?int
     {
         return $this->quantite;
     }
 
-    public function setQuantite(string $quantite): self
+    public function setQuantite(int $quantite): self
     {
         $this->quantite = $quantite;
 

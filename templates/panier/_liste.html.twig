@@ -1,9 +1,10 @@
 <table class="table">
 	<thead>
 		<tr>
-			<th{{'panier.produit' | trans}}</th>
-			<th>{{'panier.quantite' | trans}}</th>
+			<th>{{'panier.user' | trans}}</th>
+			<th>{{'panier.produit' | trans}}</th>
 			<th>{{'panier.prix' | trans}}</th>
+			<th>{{'panier.date' | trans}}</th>
 			<th>{{'panier.montant' | trans}}</th>
 			<th></th>
 		</tr>
@@ -11,9 +12,10 @@
 	<tbody>
 		{% for panier in paniers %}
 			<tr>
+				<td>{{panier.user.prenom}}</td>
 				<td></td>
 				<td></td>
-				<td></td>
+				<td>{{panier.dataAchat | date('d/m/Y')}}</td>
 				<td></td>
 				<td></td>
 			</tr>
@@ -25,4 +27,8 @@
 			</tr>
 		{% endfor %}
 	</tbody>
+
+	<pre>
+		{{ dump(paniers) }}
+	</pre>
 </table>

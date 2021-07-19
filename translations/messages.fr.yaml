@@ -5,5 +5,7 @@ panier:
   quantite : Quantité
   prix: Prix
   montant: Montant
+  user : Utilisateur
+  date: Date
 
 Panier: Panier

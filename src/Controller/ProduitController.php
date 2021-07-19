@@ -86,7 +86,7 @@ class ProduitController extends AbstractController
      */
     public function delete(Request $request, Produit $produit): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$produit->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $produit->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($produit);
             $entityManager->flush();
@@ -98,27 +98,38 @@ class ProduitController extends AbstractController
     /** @Route("/cart/{id}/add", name="cart_add") */
     public function addProductToCart(Produit $produit, Request $request): Response
     {
-        $contenuPanier = new ContenuPanier();
-        $panier = new Panier();
+        $paniers = $this->getUser()->getPaniers();
+        foreach ($paniers as $p) {
+            if ($p->getEtat() == false) {
+                $panier = $p;
+            }
+        }
+        if ($panier == null) {
+            $this->redirectToRoute('produit_index');
+        }
+
+        $contenuPanier = $panier->getContenuPanier();
+        if ($contenuPanier == null) {
+            $contenuPanier = new ContenuPanier;
+            $contenuPanier->setPanier($panier);
+        }
+
         $form = $this->createForm(ContenuPanierType::class, $contenuPanier);
         $form->handleRequest($request);
-        $panier->setEtat(false);
-        $panier->setUser($this->getUser());
 
         if ($form->isSubmitted() && $form->isValid()) {
 
             $contenuPanier->addProduit($produit);
-            // Va ajouter le produit dans le panier de l'utilisateur
-            $contenuPanier->setPanier($panier);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($contenuPanier);
             $entityManager->flush();
         }
 
-        return $this->renderForm('produit/cartAdd.html.twig',[
+        return $this->renderForm('produit/cartAdd.html.twig', [
             'produit' => $produit,
-            'form' => $form
+            'form' => $form,
+            'panier' => $panier,
+            'contenuPanier' => $contenuPanier,
         ]);
     }
 }
-
