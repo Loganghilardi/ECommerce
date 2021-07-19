@@ -17,7 +17,7 @@ class UserController extends AbstractController
     public function index(UserRepository $userRep): Response
     {
         return $this->render('user/index.html.twig', [
-            'users' => $userRep->findTodayByDate(),
+            'users' => $userRep->findToday(),
         ]);
     }
 

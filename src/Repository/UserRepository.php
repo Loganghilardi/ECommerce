@@ -39,7 +39,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     /**
      * @return User[] Returns an array of User objects
      */
-    public function findTodayByDate()
+    public function findToday()
     {
         $now = new \DateTime();
         $from = new \DateTime($now->format("Y-m-d")." 00:00:00");
