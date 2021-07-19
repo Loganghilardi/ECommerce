@@ -9,11 +9,11 @@
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Email</th>
-                <th>Prenom</th>
-                <th>Nom</th>
-                <th>Roles</th>
-                <th>actions</th>
+                <th>{{'Email'|trans}}</th>
+                <th>{{'FirstName'|trans}}</th>
+                <th>{{'LastName'|trans}}</th>
+                <th>{{'Role'|trans}}</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -25,17 +25,17 @@
                 <td>{{ user.nom }}</td>
                 <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
                 <td>
-                    <a href="{{ path('user_show', {'id': user.id}) }}">show</a>
-                    <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
+                    <a href="{{ path('user_show', {'id': user.id}) }}">{{'Show'|trans}}</a>
+                    <a href="{{ path('user_edit', {'id': user.id}) }}">{{'Edit'|trans}}</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="7">no records found</td>
+                <td colspan="7">{{'user.NotFound'|trans}}</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('user_new') }}">Create new</a>
+    <a href="{{ path('user_new') }}">{{'user.Create'|trans}}</a>
 {% endblock %}

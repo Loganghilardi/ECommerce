@@ -1,0 +1,12 @@
+Email: Email
+FirstName: FirstName
+LastName: LastName
+Role: Role
+Show: Show
+Edit: Edit
+Back: Back
+Orders: Orders
+Delete: Delete
+user:
+  Create: Create new User
+  NotFound: User not found

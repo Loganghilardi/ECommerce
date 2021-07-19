@@ -12,19 +12,19 @@
                 <td>{{ user.id }}</td>
             </tr>
             <tr>
-                <th>Email</th>
+                <th>{{'Email'|trans}}</th>
                 <td>{{ user.email }}</td>
             </tr>
             <tr>
-                <th>Prenom</th>
+                <th>{{'FirstName'|trans}}</th>
                 <td>{{ user.prenom }}</td>
             </tr>
             <tr>
-                <th>Nom</th>
+                <th>{{'LastName'|trans}}</th>
                 <td>{{ user.nom }}</td>
             </tr>
             <tr>
-                <th>Roles</th>
+                <th>{{'Role'|trans}}</th>
                 <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
             </tr>
             {# <tr>
@@ -32,7 +32,7 @@
                 <td>{{ user.password }}</td>
             </tr> #}
             <tr>
-                <th>Orders</th>
+                <th>{{'Orders'|trans}}</th>
                 <td>
                     <ul>
                         {% for panier in user.paniers %}
@@ -46,7 +46,7 @@
     
     
     {% if app.user is not null and (is_granted('ROLE_USER') or is_granted('ROLE_ADMIN') or is_granted('ROLE_SUPER_ADMIN'))%}
-        <a class="btn btn-primary" href="{{ path('user_edit', {'id': user.id}) }}">Edit</a>
+        <a class="btn btn-primary" href="{{ path('user_edit', {'id': user.id}) }}">{{'Edit'|trans}}</a>
     {% endif %}
     
     {% if app.user is not null and (is_granted('ROLE_SUPER_ADMIN')) %}

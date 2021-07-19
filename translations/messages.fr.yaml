@@ -1,0 +1,12 @@
+Email: Email
+FirstName: Prénom
+LastName: Nom
+Role: Rôle
+Show: Voir
+Edit: Modifier
+Back: Retour
+Orders: Commandes
+Delete: Supprimer
+user:
+  Create: Ajouter un utilisateur
+  NotFound: Aucun utilisateur
