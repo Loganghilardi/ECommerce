@@ -96,17 +96,19 @@ class ProduitController extends AbstractController
     }
 
     /** @Route("/cart/{id}/add", name="cart_add") */
-    public function addProductToCart(Produit $produit, Request $request,Panier $panier): Response
+    public function addProductToCart(Produit $produit, Request $request): Response
     {
         $contenuPanier = new ContenuPanier();
+        $panier = new Panier();
         $form = $this->createForm(ContenuPanierType::class, $contenuPanier);
         $form->handleRequest($request);
-        $panier->setUSer($this->getUser());
+        $panier->setEtat(false);
+        $panier->setUser($this->getUser());
 
         if ($form->isSubmitted() && $form->isValid()) {
 
             $contenuPanier->addProduit($produit);
-            // Est censé récupérer le panier de l'utilisateur connecté
+            // Va ajouter le produit dans le panier de l'utilisateur
             $contenuPanier->setPanier($panier);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($contenuPanier);
